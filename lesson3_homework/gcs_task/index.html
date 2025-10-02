@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Class Knowledge</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .skill {
+            margin: 20px 0;
+        }
+        .skill-name {
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            text-transform: capitalize;
+        }
+        .skill-bar {
+            width: 100%;
+            height: 30px;
+            background: #e0e0e0;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+        .skill-level {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: bold;
+            transition: width 1s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>My Class Knowledge</h1>
+        
+        <div class="skill">
+            <div class="skill-name">Networking</div>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 50%;">5</div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-name">Linux</div>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 60%;">6</div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-name">Docker</div>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 70%;">7</div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-name">GCP</div>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 70%;">7</div>
+            </div>
+        </div>
+
+        <div class="skill">
+            <div class="skill-name">Terraform</div>
+            <div class="skill-bar">
+                <div class="skill-level" style="width: 80%;">8</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
