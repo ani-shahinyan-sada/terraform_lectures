@@ -17,5 +17,5 @@ resource "google_dns_record_set" "a" {
   managed_zone = google_dns_managed_zone.private-zone.name
   type         = var.record_type
   project      = var.project_id
-  rrdatas      = [google_compute_instance.instances[each.key].network_interface[0].access_config[0].nat_ip]
+  rrdatas      = [google_compute_instance.instances[each.key].network_interface[0].network_ip]
 }

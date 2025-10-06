@@ -13,20 +13,20 @@ sudo apt-get update
 sudo apt-get install -y grafana
 
 sudo mkdir -p /etc/grafana/provisioning/datasources
-sudo cat > /etc/grafana/provisioning/datasources/loki.yml <<EOF
+sudo cat > /etc/grafana/provisioning/datasources/datasources.yml <<EOF
 apiVersion: 1
 
 datasources:
   - name: Loki
     type: loki
     access: proxy
-    url: http://loki.monitoring:3100
+    url: http://loki.monitoring.ani.com:3100
     isDefault: true
     editable: true
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: http://prom.monitoring:9090
+    url: http://prom.monitoring.ani.com:9090
 
 
 EOF

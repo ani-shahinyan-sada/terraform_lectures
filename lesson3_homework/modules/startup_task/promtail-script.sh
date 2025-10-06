@@ -7,9 +7,11 @@ apt-get install -y wget unzip curl
 
 PROMTAIL_VERSION="2.9.3"
 ARCH="amd64"
-LOKI_URL="http://loki.monitoring:3100"
+LOKI_URL="http://loki.monitoring.ani.com:3100"
 
 useradd --system --no-create-home --shell /bin/false promtail || true
+usermod -aG adm promtail
+usermod -aG systemd-journal promtail
 mkdir -p /etc/promtail
 mkdir -p /var/lib/promtail
 mkdir -p /var/log/promtail

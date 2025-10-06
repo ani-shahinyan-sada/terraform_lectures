@@ -148,7 +148,7 @@ variable "vm_attributes" {
     promtail-vm = {
       name           = "promtail-vm"
       startup_script = "promtail-script.sh"
-      zone           = "us-west1-a"
+      zone           = "us-west1-b"
 
       dns_name = "promtail.monitoring"
       subnet = {

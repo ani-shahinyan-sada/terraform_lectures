@@ -26,7 +26,8 @@ resource "google_compute_instance" "instances" {
 
 
   service_account {
-    email  = google_service_account.object_viewer.email
+    #email  = google_service_account.object_viewer.email
+    email = data.google_service_account.object_viewer.email
     scopes = var.scopes
   }
 
