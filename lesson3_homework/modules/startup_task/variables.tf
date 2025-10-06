@@ -11,10 +11,10 @@ variable "allowed_source_ranges" {
 }
 
 variable "role" {
-  type = string
+  type        = string
   description = "the service account has the following role on the bucket objetcs (for the vms)"
-  default = "roles/storage.objectViewer"
-  
+  default     = "roles/storage.objectViewer"
+
 }
 
 variable "protocol" {

@@ -1,6 +1,6 @@
 resource "google_compute_instance" "instances" {
   for_each = var.vm_attributes
-  project = var.project_id
+  project  = var.project_id
 
   name         = each.value.name
   machine_type = data.google_compute_machine_types.vm_machine_type.machine_types[0].name
@@ -8,10 +8,10 @@ resource "google_compute_instance" "instances" {
 
   boot_disk {
     initialize_params {
-      image  = data.google_compute_image.vm_image.self_link
+      image = data.google_compute_image.vm_image.self_link
     }
   }
-  tags = var.source_tags 
+  tags = var.source_tags
   network_interface {
     network    = google_compute_network.vpc_network.self_link
     subnetwork = google_compute_subnetwork.sirelis-subnets[each.key].self_link
