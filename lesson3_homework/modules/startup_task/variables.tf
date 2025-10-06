@@ -106,7 +106,7 @@ variable "vm_attributes" {
       dns_name       = "node.monitoring"
       subnet = {
         region      = "us-central1"
-        subnet_name = "sirelis1-vm"
+        subnet_name = "node-subnet"
         mask        = "10.5.0.0/24"
       }
     }
@@ -117,7 +117,7 @@ variable "vm_attributes" {
       dns_name       = "prom.monitoring"
       subnet = {
         region      = "us-central1"
-        subnet_name = "sirelis2-vm"
+        subnet_name = "prom-subnet"
         mask        = "10.6.0.0/24"
       }
     }
@@ -129,7 +129,7 @@ variable "vm_attributes" {
       dns_name = "graf.monitoring"
       subnet = {
         region      = "us-central1"
-        subnet_name = "sirelis3-vm"
+        subnet_name = "graf-subnet"
         mask        = "10.7.0.0/24"
       }
     }
@@ -141,7 +141,7 @@ variable "vm_attributes" {
       dns_name = "loki.monitoring"
       subnet = {
         region      = "us-central1"
-        subnet_name = "sirelis4-vm"
+        subnet_name = "loki-subnet"
         mask        = "10.8.0.0/24"
       }
     }
@@ -153,7 +153,7 @@ variable "vm_attributes" {
       dns_name = "promtail.monitoring"
       subnet = {
         region      = "us-west1"
-        subnet_name = "sirelis5-vm"
+        subnet_name = "promtail-subnet"
         mask        = "10.9.0.0/24"
       }
     }
