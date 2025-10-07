@@ -16,9 +16,10 @@ variable "dns-name" {
 variable "visibility-type" {
   type        = string
   description = "whether the dns zone is private or public"
+  default = "private"
 }
 
 variable "vpc_network_id" {
   type        = string
-  description = "the ID of the VPC network"
+  description = "the ID of the VPC network (to be used here after vpc is created)"
 }

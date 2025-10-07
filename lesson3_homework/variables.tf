@@ -100,15 +100,15 @@ variable "record_type" {
 
 variable "vm_attributes" {
   type = map(object({
-    vm_name          = string
-    startup_script   = string
-    vm_zone          = string
-    dns_record_name  = string
-    subnet_name      = string
-    subnet_mask      = string
-    subnet_region    = string
-    firewall_name    = string
-    firewall_ports   = list(string)
+    vm_name         = string
+    startup_script  = string
+    vm_zone         = string
+    dns_record_name = string
+    subnet_name     = string
+    subnet_mask     = string
+    subnet_region   = string
+    firewall_name   = string
+    firewall_ports  = list(string)
   }))
   description = "the attributes for each VM in the monitoring system"
 }
