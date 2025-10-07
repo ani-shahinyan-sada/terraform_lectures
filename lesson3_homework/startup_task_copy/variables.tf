@@ -49,115 +49,49 @@ variable "bucket_location" {
   default     = "US"
 }
 
-variable "firewall_rules" {
-  type = map(object({
-    name  = string
-    ports = list(string)
-  }))
-  description = "Firewall rules for monitoring services"
-  default = {
-    grafana = {
-      name  = "allow-grafana"
-      ports = ["3000"]
-    }
-    prometheus = {
-      name  = "allow-prometheus"
-      ports = ["9090"]
-    }
-    node-exporter = {
-      name  = "allow-node-exporter"
-      ports = ["9100"]
-    }
-    loki = {
-      name  = "allow-loki"
-      ports = ["3100"]
-
-    }
-    promtail = {
-      name  = "allow-promtail"
-      ports = ["9080"]
-    }
-    ssh-access = {
-      name  = "allow-nssh-access"
-      ports = ["22"]
-    }
-
-  }
+variable "firewall_name" {
+  type        = string
+  description = "the name of the firewall rule"
 }
 
-variable "vm_attributes" {
-  type = map(object({
-    name           = string
-    startup_script = string
-    zone           = string
-    dns_name       = string
-    subnet = object({
-      region      = string
-      subnet_name = string
-      mask        = string
-    })
-  }))
-  description = "the attributes vm's should have"
-  default = {
-    node-vm = {
-      name           = "node-exporter-vm"
-      startup_script = "node-script.sh"
-      zone           = "us-central1-a"
-      dns_name       = "node.monitoring"
-      subnet = {
-        region      = "us-central1"
-        subnet_name = "node-subnet"
-        mask        = "10.5.0.0/24"
-      }
-    }
-    prom-vm = {
-      name           = "prometheus-vm"
-      startup_script = "prom-script.sh"
-      zone           = "us-central1-a"
-      dns_name       = "prom.monitoring"
-      subnet = {
-        region      = "us-central1"
-        subnet_name = "prom-subnet"
-        mask        = "10.6.0.0/24"
-      }
-    }
-    graf-vm = {
-      name           = "grafana-vm"
-      startup_script = "graf-script.sh"
-      zone           = "us-central1-a"
+variable "firewall_ports" {
+  type        = list(string)
+  description = "the ports to allow in the firewall rule"
+}
 
-      dns_name = "graf.monitoring"
-      subnet = {
-        region      = "us-central1"
-        subnet_name = "graf-subnet"
-        mask        = "10.7.0.0/24"
-      }
-    }
-    loki-vm = {
-      name           = "loki-vm"
-      startup_script = "loki-script.sh"
-      zone           = "us-central1-a"
+variable "vm_name" {
+  type        = string
+  description = "the name of the VM instance"
+}
 
-      dns_name = "loki.monitoring"
-      subnet = {
-        region      = "us-central1"
-        subnet_name = "loki-subnet"
-        mask        = "10.8.0.0/24"
-      }
-    }
-    promtail-vm = {
-      name           = "promtail-vm"
-      startup_script = "promtail-script.sh"
-      zone           = "us-west1-b"
+variable "startup_script" {
+  type        = string
+  description = "the startup script filename for the VM"
+}
 
-      dns_name = "promtail.monitoring"
-      subnet = {
-        region      = "us-west1"
-        subnet_name = "promtail-subnet"
-        mask        = "10.9.0.0/24"
-      }
-    }
-  }
+variable "vm_zone" {
+  type        = string
+  description = "the zone where the VM will be created"
+}
+
+variable "dns_record_name" {
+  type        = string
+  description = "the DNS record name for the VM"
+}
+
+variable "subnet_name" {
+  type        = string
+  description = "the name of the subnet"
+}
+
+variable "subnet_mask" {
+  type        = string
+  description = "the CIDR mask for the subnet"
+}
+
+variable "subnet_region" {
+  type        = string
+  description = "the region for the subnet"
 }
 
 variable "record_type" {

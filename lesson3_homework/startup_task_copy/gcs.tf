@@ -9,8 +9,7 @@ resource "google_storage_bucket" "scripts" {
 }
 
 resource "google_storage_bucket_object" "script" {
-  for_each = var.vm_attributes
-  name     = each.value.name
-  source   = each.value.startup_script
-  bucket   = google_storage_bucket.scripts.name
+  name   = var.vm_name
+  source = var.startup_script
+  bucket = google_storage_bucket.scripts.name
 }

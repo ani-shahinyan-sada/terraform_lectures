@@ -1,10 +1,9 @@
-resource "google_compute_instance" "instances" {
-  for_each = var.vm_attributes
+resource "google_compute_instance" "instance" {
   project  = var.project_id
 
-  name         = each.value.name
+  name         = var.vm_name
   machine_type = data.google_compute_machine_types.vm_machine_type.machine_types[0].name
-  zone         = each.value.zone
+  zone         = var.vm_zone
 
   boot_disk {
     initialize_params {
@@ -14,14 +13,14 @@ resource "google_compute_instance" "instances" {
   tags = var.source_tags
   network_interface {
     network    = google_compute_network.vpc_network.self_link
-    subnetwork = google_compute_subnetwork.sirelis-subnets[each.key].self_link
+    subnetwork = google_compute_subnetwork.subnet.self_link
 
     access_config {
     }
   }
 
   metadata = {
-    startup-script-url = "https://storage.cloud.google.com/${google_storage_bucket.scripts.name}/${each.value.name}"
+    startup-script-url = "https://storage.cloud.google.com/${google_storage_bucket.scripts.name}/${var.vm_name}"
   }
 
 
