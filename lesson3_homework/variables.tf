@@ -33,6 +33,7 @@ variable "service_account_display_name" {
   description = "the display name of the service account"
 }
 
+
 variable "vpc_network_name" {
   type        = string
   description = "the name of the vpc network"

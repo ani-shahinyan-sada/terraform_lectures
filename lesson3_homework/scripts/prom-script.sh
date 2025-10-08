@@ -40,6 +40,9 @@ scrape_configs:
   - job_name: 'prometheus'
     static_configs:
       - targets: ['localhost:9090']
+  - job_name: 'node'
+    static_configs:
+      - targets: ['localhost:9100']
 EOF
 
 sudo cat <<'EOF' | sudo tee /etc/systemd/system/prometheus.service >/dev/null

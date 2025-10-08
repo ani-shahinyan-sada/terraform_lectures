@@ -5,12 +5,8 @@ resource "google_storage_bucket" "scripts" {
   project       = var.project_id
 
   uniform_bucket_level_access = true
+  #unifies access management by disabling Access Control Lists (ACLs)
+  #and using only Identity and Access Management (IAM)
+  #policies to control permissions for the entire bucket and its objects
 }
 
-resource "google_storage_bucket_object" "scripts" {
-  for_each = var.vm_attributes
-
-  name   = each.value.vm_name
-  source = "scripts/${each.value.startup_script}"
-  bucket = google_storage_bucket.scripts.name
-}

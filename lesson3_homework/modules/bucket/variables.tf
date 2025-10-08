@@ -13,12 +13,5 @@ variable "bucket_location" {
   description = "the location where the bucket is"
 }
 
-variable "object_name" {
-  type        = string
-  description = "the name of the object in the bucket"
-}
 
-variable "script_source_path" {
-  type        = string
-  description = "the local path to the script file"
-}
+
