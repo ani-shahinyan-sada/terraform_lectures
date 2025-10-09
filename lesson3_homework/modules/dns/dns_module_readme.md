@@ -36,9 +36,6 @@ module "dns" {
 |--------|------|-------------|---------|
 | `managed_zone_name` | string | resource name of the managed zone, passed to dns_records module to specify which zone to add records to | DNS Records module |
 | `managed_zone_dns_name` | string | full dns domain with trailing dot (e.g., 'ani.dev.com.'), passed to dns_records module to construct full record names | DNS Records module |
-| `id` | string | terraform resource identifier for the dns zone (format: projects/{{project}}/managedZones/{{name}}), not currently used by other modules | Not currently used |
-| `managed_zone_id` | string | gcp-assigned numeric id for the managed zone, not currently used by other modules but useful for api calls or debugging | Not currently used |
-| `name_servers` | list(string) | list of authoritative name servers for this zone, empty for private zones, used for public zone delegation, not currently consumed by other modules | Not currently used |
 
 ## Configuration Details
 
