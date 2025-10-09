@@ -37,11 +37,10 @@ module "firewall" {
 
 ## Outputs
 
-| Output | Type | Description | Used By |
-|--------|------|-------------|---------|
-| `firewall_rule_name` | string | name of the created firewall rule, not currently consumed by other modules but useful for verification or additional firewall configurations | Not currently used |
-| `firewall_rule_id` | string | terraform resource identifier for this firewall rule (format: projects/{{project}}/global/firewalls/{{name}}), useful for dependencies or debugging | Not currently used |
-
+| Output | Type | Description | 
+|--------|------|-------------|
+| `firewall_rule_name` | string | name of the created firewall rule, not currently consumed by other modules but useful for verification or additional firewall configurations | 
+| `firewall_rule_id` | string | terraform resource identifier for this firewall rule (format: projects/{{project}}/global/firewalls/{{name}}), useful for dependencies or debugging |
 ## Configuration Details
 
 ### Port Configuration by Service
