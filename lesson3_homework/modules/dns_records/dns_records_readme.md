@@ -35,11 +35,11 @@ module "dns_records" {
 
 ## Outputs
 
-| Output | Type | Description | Used By |
-|--------|------|-------------|---------|
-| `fqdn` | string | fully qualified domain name created for this vm (e.g., 'node.monitoring.ani.dev.com.'), can be used by other vms to connect via dns instead of ip | Not currently used, but available for inter-VM communication |
-| `ip_address` | string | ip address this dns record points to, same as the vm's internal ip, useful for verification | Not currently used |
-| `record_id` | string | terraform resource identifier for this dns record (format: projects/{{project}}/managedZones/{{zone}}/rrsets/{{name}}/{{type}}), useful for debugging | Not currently used |
+| Output | Type | Description |
+|--------|------|-------------|
+| `fqdn` | string | fully qualified domain name created for this vm (e.g., 'node.monitoring.ani.dev.com.'), can be used by other vms to connect via dns instead of ip | 
+| `ip_address` | string | ip address this dns record points to, same as the vm's internal ip, useful for verification | 
+| `record_id` | string | terraform resource identifier for this dns record (format: projects/{{project}}/managedZones/{{zone}}/rrsets/{{name}}/{{type}}), useful for debugging |
 
 ## Configuration Details
 
