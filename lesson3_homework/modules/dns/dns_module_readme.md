@@ -73,9 +73,9 @@ The trailing dot is required by DNS standards and indicates this is a fully qual
 - **VPC Module** - requires `vpc_network_id` output to configure private zone visibility
 
 ## Notes
-- This creates a single private DNS zone for all VMs
-- The zone provides internal DNS resolution for the monitoring infrastructure
-- VMs can use friendly hostnames instead of IP addresses to communicate
-- DNS records are added via the dns_records module, not directly in this module
+- This creates a single private DNS zone
+- The zone provides internal DNS resolution 
+- Copmute resources can use friendly hostnames instead of IP addresses to communicate
+- DNS records are added via the dns_records module
 - For private zones, `name_servers` output will be empty since Google handles resolution internally
 - The zone must be created before DNS records can be added to it

@@ -24,7 +24,7 @@ variable "protocol" {
 
 variable "firewall_ports" {
   type        = list(string)
-  description = "list of port numbers to open for this specific vm (e.g., ['9100'] for node exporter), comes from vm_attributes map in root, each vm has different ports"
+  description = "list of port numbers to open for this specific vm , comes from vm_attributes map in root, each vm has different ports"
   default = [ ]
 }
 
