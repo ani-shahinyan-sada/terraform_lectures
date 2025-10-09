@@ -1,34 +1,34 @@
 variable "project_id" {
   type        = string
-  description = "project where resources are configured"
+  description = "gcp project id where the firewall rule will be created, passed from root variable"
 }
 
 variable "firewall_name" {
   type        = string
-  description = "the name of the firewall rule"
+  description = "unique name for this firewall rule, comes from vm_attributes map in root (e.g., 'allow-node-exporter'), must be unique per project"
 }
 
 variable "vpc_network_self_link" {
   type        = string
-  description = "the self link of the VPC network"
+  description = "full resource path of the vpc network to attach this rule to, comes from vpc module output"
 }
 
 variable "protocol" {
   type        = string
-  description = "the protocol used by the network"
+  description = "network protocol to allow through firewall , passed from root variable, same for all firewall rules"
 }
 
 variable "firewall_ports" {
   type        = list(string)
-  description = "the ports to allow in the firewall rule"
+  description = "list of port numbers to open for this specific vm (e.g., ['9100'] for node exporter), comes from vm_attributes map in root, each vm has different ports"
 }
 
 variable "allowed_source_ranges" {
   type        = list(string)
-  description = "IP ranges allowed to access monitoring services"
+  description = "cidr blocks allowed to connect to these ports, passed from root variable, same for all rules"
 }
 
 variable "target_tags" {
   type        = list(string)
-  description = "the tags given to the firewall"
+  description = "network tags that this firewall rule applies to, passed from root variable, vms must have matching source_tags to receive traffic through this rule"
 }

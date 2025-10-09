@@ -1,7 +1,7 @@
 resource "google_storage_bucket" "scripts" {
   name          = var.bucket_name
   location      = var.bucket_location
-  force_destroy = false
+  force_destroy = false #delete objets in the buckets before deleting the bucket
   project       = var.project_id
 
   uniform_bucket_level_access = true

@@ -1,9 +1,9 @@
 variable "project_id" {
   type        = string
-  description = "project where resources are configured"
+  description = "gcp project id where the vpc network will be created, passed from root variable"
 }
 
 variable "vpc_network_name" {
   type        = string
-  description = "the name of the vpc network"
+  description = "unique name for the vpc network , passed from root variable"
 }

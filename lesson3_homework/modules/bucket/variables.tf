@@ -12,6 +12,3 @@ variable "bucket_location" {
   type        = string
   description = "the location where the bucket is"
 }
-
-
-

@@ -43,13 +43,6 @@ This module uses uniform bucket-level access, which:
 - Provides consistent, centralized access control across all bucket objects
 - Simplifies permission management and improves security posture
 
-## Important Notes
-
-⚠️ **Destroy Protection**: The bucket is created with `force_destroy = false`, which means Terraform will refuse to destroy the bucket if it contains any objects. This is a safety feature to prevent accidental data loss.
-
-To delete a bucket with this configuration, you must either:
-1. Empty the bucket manually before running `terraform destroy`
-2. Temporarily set `force_destroy = true` (not recommended for production)
 
 ## Example
 
