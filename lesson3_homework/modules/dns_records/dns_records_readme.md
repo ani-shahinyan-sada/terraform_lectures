@@ -67,10 +67,8 @@ The DNS record points to the VM's internal IP address from its subnet. Example:
 - **GCE Module** - requires `instance_network_ip` output (matched by for_each key)
 
 ## Notes
-- Created via `for_each` loop - one DNS record per VM
+
 - All records are type A (IPv4 address mapping)
 - Records use internal IPs, not external IPs
 - The trailing dot in `dns_zone_dns_name` is required by DNS standards
 - VMs can now communicate using hostnames like `prom.monitoring.ani.dev.com` instead of IP addresses
-- Useful for Prometheus configuration to scrape targets by hostname
-- Makes configuration more maintainable since IPs can change but hostnames remain constant
