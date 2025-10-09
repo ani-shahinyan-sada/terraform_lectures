@@ -51,16 +51,11 @@ The full domain name is constructed by combining:
 
 Example mappings:
 - `node.monitoring` + `ani.dev.com.` = `node.monitoring.ani.dev.com.`
-- `prom.monitoring` + `ani.dev.com.` = `prom.monitoring.ani.dev.com.`
-- `graf.monitoring` + `ani.dev.com.` = `graf.monitoring.ani.dev.com.`
-- `loki.monitoring` + `ani.dev.com.` = `loki.monitoring.ani.dev.com.`
-- `promtail.monitoring` + `ani.dev.com.` = `promtail.monitoring.ani.dev.com.`
 
 ### Record Data (rrdatas)
 The DNS record points to the VM's internal IP address from its subnet. Example:
 - node-exporter-vm (10.5.0.x) → node.monitoring.ani.dev.com
-- prometheus-vm (10.6.0.x) → prom.monitoring.ani.dev.com
-- grafana-vm (10.7.0.x) → graf.monitoring.ani.dev.com
+
 
 ### Private DNS Resolution
 - Records are only resolvable within the VPC
