@@ -43,16 +43,9 @@ module "firewall" {
 | `firewall_rule_id` | string | terraform resource identifier for this firewall rule (format: projects/{{project}}/global/firewalls/{{name}}), useful for dependencies or debugging |
 ## Configuration Details
 
-### Port Configuration by Service
-Each monitoring service requires different ports:
-- Node Exporter: 9100
-- Prometheus: 9090
-- Grafana: 3000
-- Loki: 3100
-- Promtail: 9080
 
 ### Network Tags
-The firewall rule uses `target_tags` to identify which VMs it applies to. VMs must have matching `source_tags` for the rule to take effect. In this configuration, both are set to `["foo", "bar"]`.
+The firewall rule uses `target_tags` to identify which VMs it applies to. VMs must have matching `source_tags` for the rule to take effect. In this configuration, both are set to `["foo", "bar"]` by default.
 
 ### Source Ranges
 `allowed_source_ranges = ["0.0.0.0/0"]` allows traffic from any IP address. For production environments, consider restricting this to:
