@@ -1,5 +1,5 @@
 resource "google_compute_instance" "instance" {
-  project  = var.project_id
+  project = var.project_id
 
   name         = var.vm_name
   machine_type = var.machine_type
@@ -14,7 +14,7 @@ resource "google_compute_instance" "instance" {
   network_interface {
     network    = var.vpc_network_self_link
     subnetwork = var.subnet_self_link
-  #allow the vm to have a public IP
+    #allow the vm to have a public IP
     access_config {
     }
   }

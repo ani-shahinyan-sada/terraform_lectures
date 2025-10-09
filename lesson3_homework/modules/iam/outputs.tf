@@ -9,6 +9,6 @@ output "iam_member_role" {
 }
 
 output "id" {
-  value = google_storage_bucket_iam_member.vm_access.id
+  value       = google_storage_bucket_iam_member.vm_access.id
   description = "the id of the bucket iam member"
 }

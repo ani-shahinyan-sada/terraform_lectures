@@ -1,29 +1,29 @@
 variable "project_id" {
   type        = string
   description = "project where resources are configured"
-  default = ""
+  default     = ""
 }
 
 variable "private-zone-name" {
   type        = string
   description = "name of the managed zone"
-  default = ""
+  default     = ""
 }
 
 variable "dns-name" {
   type        = string
   description = "name of the dns"
-  default = ""
+  default     = ""
 }
 
 variable "visibility-type" {
   type        = string
   description = "whether the dns zone is private or public"
-  default = "private"
+  default     = "private"
 }
 
 variable "vpc_network_id" {
   type        = string
   description = "the ID of the VPC network (to be used here after vpc is created)"
-  default = ""
+  default     = ""
 }

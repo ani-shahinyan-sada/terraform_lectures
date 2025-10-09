@@ -63,16 +63,16 @@ module "object" {
   object_name        = each.value.vm_name
   script_source_path = "./scripts/${each.value.startup_script}"
   bucket_name        = var.bucket_name
-  depends_on         = [module.bucket]  #module.serviceacc]
+  depends_on         = [module.bucket] #module.serviceacc]
 }
 
 module "serviceacc" {
-  source = "./modules/service_account"
+  source                       = "./modules/service_account"
   service_account_display_name = var.service_account_display_name
-  project_id = var.project_id
-  service_account_id = var.service_account_id
-  depends_on = [ module.bucket , module.object]
-  
+  project_id                   = var.project_id
+  service_account_id           = var.service_account_id
+  depends_on                   = [module.bucket, module.object]
+
 }
 
 module "iam" {
@@ -80,7 +80,7 @@ module "iam" {
   role                  = var.role
   service_account_email = "${var.service_account_id}@${var.project_id}.iam.gserviceaccount.com"
   bucket_name           = var.bucket_name
-  depends_on = [ module.serviceacc , module.bucket]
+  depends_on            = [module.serviceacc, module.bucket]
 }
 
 module "dns" {
