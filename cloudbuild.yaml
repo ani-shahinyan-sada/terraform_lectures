@@ -1,0 +1,10 @@
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/testing-modules-474322/cloud-run-app:latest', '.']
+  dir: 'cloud-run-app'
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/testing-modules-474322/cloud-run-app:latest']
