@@ -34,3 +34,14 @@ output "second_subnet_network" {
 #   value       = local.healthchecks
 # }
 
+#cloudbuild outputs 
+
+output "cloud_build_repositories_2nd_gen_connection" {
+  description = "Cloudbuild connection created."
+  value       = module.git_repo_connection.cloud_build_repositories_2nd_gen_connection
+}
+
+output "cloud_build_repositories_2nd_gen_repositories" {
+  description = "Created repositories."
+  value       = module.git_repo_connection.cloud_build_repositories_2nd_gen_repositories
+}
