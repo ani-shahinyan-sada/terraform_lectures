@@ -173,6 +173,21 @@ variable "mig_bucket_objects" {
   default = {}
 }
 
+variable "app_bucket_name" {
+  description = "The name of the app storage bucket (must be globally unique)"
+  type        = string
+  default     = null
+}
+
+variable "app_bucket_objects" {
+  description = "Map of app objects to upload to the bucket. Each object must specify name and source file path."
+  type = map(object({
+    name   = string
+    source = string
+  }))
+  default = {}
+}
+
 
 
 variable "http_rule_name" {
@@ -424,4 +439,29 @@ variable "external_ip_name" {
   type        = string
   description = "name for the external IP address"
   default     = "external-ip-first"
+}
+
+# Cloud Build variables
+variable "github_owner" {
+  type        = string
+  description = "GitHub repository owner/organization"
+  default     = null
+}
+
+variable "github_repo" {
+  type        = string
+  description = "GitHub repository name"
+  default     = null
+}
+
+variable "github_connection_name" {
+  type        = string
+  description = "Name of the GitHub connection created in Cloud Build"
+  default     = null
+}
+
+variable "cloudbuild_service_account" {
+  type        = string
+  description = "Service account email for Cloud Build"
+  default     = null
 }
