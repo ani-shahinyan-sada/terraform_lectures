@@ -173,19 +173,7 @@ variable "mig_bucket_objects" {
   default = {}
 }
 
-variable "app_bucket_name" {
-  description = "The name of the storage bucket (must be globally unique)"
-  type        = string
-}
 
-variable "app_bucket_objects" {
-  description = "Map of objects to upload to the bucket. Each object must specify name and source file path."
-  type = map(object({
-    name   = string
-    source = string
-  }))
-  default = {}
-}
 
 variable "http_rule_name" {
   type        = string
