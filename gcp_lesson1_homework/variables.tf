@@ -1,3 +1,47 @@
+variable "migs" {
+  type = map(object({
+    name               = string
+    hostname           = string
+    name_prefix        = string
+    subnet_location         = string
+    min_replicas       = number
+    max_replicas       = number
+    path_name = string
+  }))
+  default = {
+    mig1 = {
+      name         = "mig1"
+      hostname     = "mig-simple1"
+      name_prefix  = "first"
+      subnet_location   = "us-west1/subnet-01"
+      min_replicas = 2
+      max_replicas = 2
+      path_name = "mig1"
+    }
+    mig2 = {
+      name         = "mig2"
+      hostname     = "mig-simple2"
+      name_prefix  = "second"
+      subnet_location   = "us-west1/subnet-02"
+      min_replicas = 1
+      max_replicas = 1
+      path_name = "mig2"
+    }
+  }
+}
+
+# variable "subnet_locals1" {
+#   default = "us-west1/subnet-01"
+#   description = "the key of the subnet1"
+#   type = string
+# }
+
+# variable "subnet_locals2" {
+#   default = "us-west1/subnet-02"
+#   description = "the key of the subnet2"
+#   type = string
+# }
+
 variable "project_id" {
   description = "The ID of the project where this VPC will be created"
   type        = string
@@ -65,6 +109,84 @@ variable "min_replicas2" {
 }
 
 #firewall variables
+variable "fw_rules" {
+  type = map(object({
+    name          = string
+    source_ranges = list(string)
+    target_tags   = list(string)
+    ports         = list(number)
+  }))
+  description = "map of firewall rules to create"
+  default = {
+    http = {
+      name          = "allow-http"
+      source_ranges = ["0.0.0.0/0"]
+      target_tags   = ["http-server"]
+      ports         = [80]
+    }
+    health_check = {
+      name          = "allow-health-check"
+      source_ranges = ["35.191.0.0/16", "130.211.0.0/22"]
+      target_tags   = ["http-server"]
+      ports         = [80]
+    }
+    ssh = {
+      name          = "allow-ssh"
+      source_ranges = ["0.0.0.0/0"]
+      target_tags   = ["ssh"]
+      ports         = [22]
+    }
+  }
+}
+
+
+variable "service_acc_id" {
+}
+
+variable "display_name" {
+}
+
+
+variable "bucket_name" {
+  description = "The name of the storage bucket (must be globally unique)"
+  type        = string
+}
+
+variable "location" {
+  description = "The location of the bucket (US, EU, ASIA, or specific region)"
+  type        = string
+  default     = "US"
+}
+
+variable "force_destroy" {
+  description = "When deleting the bucket, delete all objects in the bucket first"
+  type        = bool
+  default     = false
+}
+
+variable "mig_bucket_objects" {
+  description = "Map of objects to upload to the bucket. Each object must specify name and source file path."
+  type = map(object({
+    name   = string
+    source = string
+  }))
+  default = {}
+}
+
+variable "app_bucket_name" {
+  description = "The name of the storage bucket (must be globally unique)"
+  type        = string
+}
+
+variable "app_bucket_objects" {
+  description = "Map of objects to upload to the bucket. Each object must specify name and source file path."
+  type = map(object({
+    name   = string
+    source = string
+  }))
+  default = {}
+}
+
 variable "http_rule_name" {
   type        = string
   description = "name of the firewall rule"

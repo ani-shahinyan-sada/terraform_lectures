@@ -1,14 +1,17 @@
-
 module "gce-lb-https" {
   source  = "terraform-google-modules/lb-http/google"
   version = "~> 12.0"
-  name    = var.lb_name
+
+  name    = "lb-for-vms"
   project = var.project_id
 
   firewall_networks = [module.vpc.network_name]
 
+  create_url_map = false
+  url_map        = google_compute_url_map.custom.self_link
+
   backends = {
-    default = {
+    mig1 = {
       protocol    = "HTTP"
       port        = var.httpport
       port_name   = var.http_protocol
@@ -19,22 +22,74 @@ module "gce-lb-https" {
         request_path = var.lb_health_check_path
         port         = var.lb_health_check_port
       }
+
       log_config = {
         enable      = true
         sample_rate = var.lb_log_sample_rate
       }
+
       groups = [
         {
-          group = module.managed_instance_group_1.instance_group
-        },
-        {
-          group = module.managed_instance_group_2.instance_group
-        },
+          group = module.mig["mig1"].instance_group
+        }
       ]
 
       iap_config = {
         enable = var.lb_enable_iap
       }
+    }
+    mig2 = {
+      protocol    = "HTTP"
+      port        = var.httpport
+      port_name   = var.http_protocol
+      timeout_sec = var.lb_timeout_sec
+      enable_cdn  = var.lb_enable_cdn
+
+      health_check = {
+        request_path = var.lb_health_check_path
+        port         = var.lb_health_check_port
+      }
+
+      log_config = {
+        enable      = true
+        sample_rate = var.lb_log_sample_rate
+      }
+
+      groups = [
+        {
+          group = module.mig["mig2"].instance_group
+        }
+      ]
+
+      iap_config = {
+        enable = var.lb_enable_iap
+      }
+    }
+  }
+}
+
+resource "google_compute_url_map" "custom" {
+  name            = "lb-for-vms-url-map"
+  project         = var.project_id
+  default_service = module.gce-lb-https.backend_services["mig1"].self_link
+
+  host_rule {
+    hosts        = ["*"]
+    path_matcher = "allpaths"
+  }
+
+  path_matcher {
+    name            = "allpaths"
+    default_service = module.gce-lb-https.backend_services["mig1"].self_link
+
+    path_rule {
+      paths   = ["/mig1", "/mig1/*"]
+      service = module.gce-lb-https.backend_services["mig1"].self_link
+    }
+
+    path_rule {
+      paths   = ["/mig2", "/mig2/*"]
+      service = module.gce-lb-https.backend_services["mig2"].self_link
     }
   }
 }
