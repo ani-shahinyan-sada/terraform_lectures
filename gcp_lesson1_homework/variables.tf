@@ -70,6 +70,12 @@ variable "hostname2" {
   default     = "mig-simple2"
 }
 
+variable "cloud_run_deletion_protection" {
+  type = bool
+  default = false
+  description = "whether or not to prevent the cloud run from being deleted"
+}
+
 variable "http_protocol" {
   type        = string
   description = "the protocol names for the instances"
