@@ -65,9 +65,32 @@ module "gce-lb-https" {
         enable = var.lb_enable_iap
       }
     }
+
+    cloudrun = {
+      protocol   = "HTTP"
+      enable_cdn = false
+
+
+      log_config = {
+        enable      = true
+        sample_rate = 1.0
+      }
+
+      groups = [
+        {
+          group = google_compute_region_network_endpoint_group.neg.id
+        }
+      ]
+
+      iap_config = {
+        enable = false
+      }
   }
+ }
 }
 
+
+#TODO: add the paths for cloudrun and cloudrunfunctions
 resource "google_compute_url_map" "custom" {
   name            = "lb-for-vms-url-map"
   project         = var.project_id
@@ -85,6 +108,11 @@ resource "google_compute_url_map" "custom" {
     path_rule {
       paths   = ["/mig1", "/mig1/*"]
       service = module.gce-lb-https.backend_services["mig1"].self_link
+    }
+
+    path_rule {
+      paths   = ["/mig2", "/mig2/*"]
+      service = module.gce-lb-https.backend_services["mig2"].self_link
     }
 
     path_rule {

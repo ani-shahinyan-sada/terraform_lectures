@@ -7,7 +7,7 @@ resource "google_service_account" "sa" {
 resource "google_cloud_run_service_iam_binding" "binding" {
   location = var.region
   project  = var.project_id
-  service  = google_cloud_run_v2_service.default.name
+  service  = google_cloud_run_v2_service.cloud-run-app.name
   role     = var.cloudrunrole
   members = [
     var.membersforrole,
