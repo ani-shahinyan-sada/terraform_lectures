@@ -1,39 +1,39 @@
 variable "migs" {
   type = map(object({
-    name               = string
-    hostname           = string
-    name_prefix        = string
-    subnet_location         = string
-    min_replicas       = number
-    max_replicas       = number
-    path_name = string
+    name            = string
+    hostname        = string
+    name_prefix     = string
+    subnet_location = string
+    min_replicas    = number
+    max_replicas    = number
+    path_name       = string
   }))
   default = {
     mig1 = {
-      name         = "mig1"
-      hostname     = "mig-simple1"
-      name_prefix  = "first"
-      subnet_location   = "us-west1/subnet-01"
-      min_replicas = 2
-      max_replicas = 2
-      path_name = "mig1"
+      name            = "mig1"
+      hostname        = "mig-simple1"
+      name_prefix     = "first"
+      subnet_location = "us-west1/subnet-01"
+      min_replicas    = 2
+      max_replicas    = 2
+      path_name       = "mig1"
     }
     mig2 = {
-      name         = "mig2"
-      hostname     = "mig-simple2"
-      name_prefix  = "second"
-      subnet_location   = "us-west1/subnet-02"
-      min_replicas = 1
-      max_replicas = 1
-      path_name = "mig2"
+      name            = "mig2"
+      hostname        = "mig-simple2"
+      name_prefix     = "second"
+      subnet_location = "us-west1/subnet-02"
+      min_replicas    = 1
+      max_replicas    = 1
+      path_name       = "mig2"
     }
   }
 }
 
 variable "default_service_acc" {
   description = "the service account used by cloud run app"
-  type = string
-  default = ""
+  type        = string
+  default     = ""
 }
 
 variable "project_id" {
@@ -65,8 +65,8 @@ variable "hostname2" {
 }
 
 variable "cloud_run_deletion_protection" {
-  type = bool
-  default = false
+  type        = bool
+  default     = false
   description = "whether or not to prevent the cloud run from being deleted"
 }
 
@@ -141,9 +141,15 @@ variable "fw_rules" {
 
 
 variable "service_acc_id" {
+  type        = string
+  description = "Service account email ID for the project"
+  default     = "sireli-service-account@testing-modules-474322.iam.gserviceaccount.com"
 }
 
 variable "display_name" {
+  type        = string
+  description = "Display name for the service account"
+  default     = "sireli service account"
 }
 
 
@@ -455,22 +461,22 @@ variable "github_repo" {
 }
 
 variable "run_app_repo" {
-  type = string
+  type        = string
   description = "repository from where to obtain the built image"
-  default = ""
+  default     = ""
 }
 
 variable "branch" {
-  type = string
+  type        = string
   description = "the branch where the cloud run service will look for a new deployment"
-  default = "main"
+  default     = "main"
 }
 
 variable "cloudbuild_filename" {
-  type = string
-  default = "cloudbuild.yaml"
+  type        = string
+  default     = "cloudbuild.yaml"
   description = "the name of the cloudbuild file to look for"
-  
+
 }
 
 variable "github_connection_name" {
@@ -483,4 +489,129 @@ variable "cloudbuild_service_account" {
   type        = string
   description = "Service account email for Cloud Build"
   default     = null
+}
+
+variable "cloudrun_service_account" {
+  type        = string
+  description = "Service account email for Cloud run"
+  default     = "ci-cloud-run-v2-sa"
+}
+
+variable "cloudrunsa_displayname" {
+  type        = string
+  description = "Service account email for Cloud run"
+  default     = "Service account for ci-cloud-run-v2"
+}
+
+variable "cloudrunrole" {
+  type        = string
+  description = "the public access role for Cloud run"
+  default     = "roles/run.invoker"
+}
+variable "membersforrole" {
+  type        = string
+  description = "the public access members for Cloud run"
+  default     = ""
+}
+
+variable "cloudrun_service_name" {
+  type        = string
+  default     = "cloudrun-service"
+  description = "the service name of the cloud run service"
+}
+
+variable "ingress" {
+  default     = "INGRESS_TRAFFIC_ALL"
+  type        = string
+  description = "which sources to allow traffic from"
+}
+
+variable "image" {
+  default     = ""
+  type        = string
+  description = "the artifact registry image to use for build"
+}
+
+variable "cloudrunfunction_bucketname" {
+  type        = string
+  description = "Name of the GCS bucket for Cloud Run function artifacts"
+  default     = "cloudrunfunctionbucket"
+}
+
+variable "cloudrunfunction_location" {
+  type        = string
+  description = "Location for the Cloud Run function bucket (e.g., US, EU, ASIA)"
+  default     = "US"
+}
+
+variable "functionfiletype" {
+  type        = string
+  description = "Archive type for the function source code"
+  default     = "zip"
+}
+
+variable "source_dir" {
+  type        = string
+  description = "Path to the directory containing Cloud Run function source code"
+  default     = "./cloud-run-function"
+}
+
+variable "output_path" {
+  type        = string
+  description = "Path where the function archive will be created"
+  default     = "./cloud-run-function.zip"
+}
+
+variable "excludes" {
+  type        = list(string)
+  description = "List of file patterns to exclude from the function archive"
+  default     = ["__MACOSX", ".DS_Store"]
+}
+
+variable "cloudrunobject_name" {
+  type        = string
+  description = "Name of the Cloud Run function object/archive in GCS bucket"
+  default     = "index.zip"
+}
+
+variable "cloudrunfunction_name" {
+  type        = string
+  description = "Name of the Cloud Run function"
+  default     = "function-display-app"
+}
+
+variable "function_description" {
+  type        = string
+  description = "Description of what the Cloud Run function does"
+  default     = "function to display the app"
+}
+
+variable "runtime" {
+  type        = string
+  description = "Runtime environment for the Cloud Run function (e.g., python39, nodejs18)"
+  default     = "python39"
+}
+
+variable "entry_point" {
+  type        = string
+  description = "Name of the function to execute when the Cloud Run function is triggered"
+  default     = "hello_http"
+}
+
+variable "lifecycle_rule_age" {
+  type        = number
+  description = "Number of days after which objects in the bucket will be deleted"
+  default     = 30
+}
+
+variable "lifecycle_rule_action_type" {
+  type        = string
+  description = "Action to take when lifecycle rule condition is met (e.g., Delete, SetStorageClass)"
+  default     = "Delete"
+}
+
+variable "invoker_role" {
+  type = string
+
+
 }

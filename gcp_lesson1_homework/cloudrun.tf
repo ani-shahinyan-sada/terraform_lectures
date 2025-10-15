@@ -1,38 +1,30 @@
 resource "google_service_account" "sa" {
   project      = var.project_id
-  account_id   = "ci-cloud-run-v2-sa"
-  display_name = "Service account for ci-cloud-run-v2"
+  account_id   = var.cloudrun_service_account
+  display_name = var.cloudrunsa_displayname
 }
-
-# resource "google_service_account" "sa" {
-#   project      = var.project_id
-#   account_id   = "ci-cloud-run-v2-sa"
-#   display_name = "Service account for ci-cloud-run-v2"
-# }
 
 resource "google_cloud_run_service_iam_binding" "binding" {
   location = var.region
-  project = var.project_id
-  service = google_cloud_run_v2_service.default.name
-  role = "roles/run.invoker"
+  project  = var.project_id
+  service  = google_cloud_run_v2_service.default.name
+  role     = var.cloudrunrole
   members = [
-    "allUsers",
+    var.membersforrole,
   ]
-  
+
 }
 
-resource "google_cloud_run_v2_service" "default" {
-  name     = "cloudrun-service"
-  location = var.region
+resource "google_cloud_run_v2_service" "cloud-run-app" {
+  name                = var.cloudrun_service_name
+  location            = var.region
   deletion_protection = false
-  ingress = "INGRESS_TRAFFIC_ALL"
-  project = var.project_id
+  ingress             = var.ingress # Allows traffic from which sources? (internet, VPC, and Cloud Run services)
+  project             = var.project_id
 
   template {
     containers {
-      image = "gcr.io/testing-modules-474322/cloud-run-app:latest"
+      image = var.image
     }
-
   }
-
 }
