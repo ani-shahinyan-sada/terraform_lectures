@@ -33,31 +33,6 @@ resource "google_cloud_run_v2_service" "default" {
       image = "gcr.io/testing-modules-474322/cloud-run-app:latest"
     }
 
-    vpc_access {
-      network_interfaces {
-        network    = module.vpc.network_name
-        subnetwork = "projects/${var.project_id}/regions/${var.region}/subnetworks/${module.subnet.subnets["us-west1/subnet-01"].name}"
-      }
-      egress = "PRIVATE_RANGES_ONLY"
-    }
   }
+
 }
-
-# module "cloud_run_v2" {
-#   source  = "GoogleCloudPlatform/cloud-run/google//modules/v2"
-#   version = "~> 0.16"
-
-#   service_name           = "ci-cloud-run-v2"
-#   project_id             = var.project_id
-#   location               = "us-central1"
-#   create_service_account = false
-#   service_account        = google_service_account.sa.email
-
-#   cloud_run_deletion_protection = var.cloud_run_deletion_protection
-#   containers = [
-#     {
-#       container_image = "gcr.io/testing-modules-474322/cloud-run-app:latest"
-#       container_name  = "cloudrun-app"
-#     }
-#   ]
-# }

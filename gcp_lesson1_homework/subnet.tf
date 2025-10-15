@@ -6,5 +6,4 @@ module "subnet" {
 
   subnets = var.subnets
 
-  depends_on = [module.vpc]
 }
