@@ -30,17 +30,11 @@ variable "migs" {
   }
 }
 
-# variable "subnet_locals1" {
-#   default = "us-west1/subnet-01"
-#   description = "the key of the subnet1"
-#   type = string
-# }
-
-# variable "subnet_locals2" {
-#   default = "us-west1/subnet-02"
-#   description = "the key of the subnet2"
-#   type = string
-# }
+variable "default_service_acc" {
+  description = "the service account used by cloud run app"
+  type = string
+  default = ""
+}
 
 variable "project_id" {
   description = "The ID of the project where this VPC will be created"
@@ -458,6 +452,25 @@ variable "github_repo" {
   type        = string
   description = "GitHub repository name"
   default     = null
+}
+
+variable "run_app_repo" {
+  type = string
+  description = "repository from where to obtain the built image"
+  default = ""
+}
+
+variable "branch" {
+  type = string
+  description = "the branch where the cloud run service will look for a new deployment"
+  default = "main"
+}
+
+variable "cloudbuild_filename" {
+  type = string
+  default = "cloudbuild.yaml"
+  description = "the name of the cloudbuild file to look for"
+  
 }
 
 variable "github_connection_name" {
