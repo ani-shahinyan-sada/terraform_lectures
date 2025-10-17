@@ -17,4 +17,6 @@ module "instance_template" {
   subnetwork_project = var.project_id
   tags               = var.tags
   network            = module.vpc.network_self_link
+
+  depends_on = [module.subnet]
 }

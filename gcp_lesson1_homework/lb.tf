@@ -6,6 +6,7 @@ module "gce-lb-https" {
   project = var.project_id
 
   firewall_networks = [module.vpc.network_name]
+ # load_balancing_scheme = "EXTERNAL_MANAGED"
 
   create_url_map = false
   url_map        = google_compute_url_map.custom.self_link
@@ -71,6 +72,7 @@ module "gce-lb-https" {
       enable_cdn = false
 
 
+
       log_config = {
         enable      = true
         sample_rate = 1.0
@@ -78,15 +80,15 @@ module "gce-lb-https" {
 
       groups = [
         {
-          group = google_compute_region_network_endpoint_group.neg.id
+          group = google_compute_region_network_endpoint_group.neg.self_link
         }
       ]
 
       iap_config = {
         enable = false
       }
+    }
   }
- }
 }
 
 
@@ -105,19 +107,36 @@ resource "google_compute_url_map" "custom" {
     name            = "allpaths"
     default_service = module.gce-lb-https.backend_services["mig1"].self_link
 
-    path_rule {
-      paths   = ["/mig1", "/mig1/*"]
+    route_rules {
+      priority = 1
+      match_rules {
+        prefix_match = "/cloudrun"
+      }
+      route_action {
+        url_rewrite {
+          path_prefix_rewrite = "/"
+        }
+      }
+      service = module.gce-lb-https.backend_services["cloudrun"].self_link
+    }
+
+    route_rules {
+      priority = 2
+      match_rules {
+        prefix_match = "/mig1"
+      }
       service = module.gce-lb-https.backend_services["mig1"].self_link
     }
 
-    path_rule {
-      paths   = ["/mig2", "/mig2/*"]
+    route_rules {
+      priority = 3
+      match_rules {
+        prefix_match = "/mig2"
+      }
       service = module.gce-lb-https.backend_services["mig2"].self_link
     }
 
-    path_rule {
-      paths   = ["/mig2", "/mig2/*"]
-      service = module.gce-lb-https.backend_services["mig2"].self_link
-    }
   }
 }
+
+

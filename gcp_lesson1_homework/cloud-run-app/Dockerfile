@@ -1,11 +1,11 @@
-FROM python:3.11-slim
+FROM python:3.9-alpine
 
-WORKDIR /app
-#change
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+WORKDIR /python_app
 
-COPY main.py .
+RUN pip install Flask==2.3.3 PyMySQL==1.1.0
 
-CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
-# Trigger rebuild please againnn
+COPY app.py .
+
+EXPOSE 8080
+
+CMD ["python", "app.py"]

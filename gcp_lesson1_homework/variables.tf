@@ -30,6 +30,27 @@ variable "migs" {
   }
 }
 
+variable "db_name" {
+  description = "the name of the db"
+  type        = string
+}
+
+
+variable "zone" {
+  description = "the zone where all the resources should be deployed"
+  type        = string
+}
+
+
+variable "user_password" {
+  description = "the password of the database user"
+}
+
+variable "instance_tier" {
+  description = " the tier of the database instance"
+  type        = string
+}
+
 variable "default_service_acc" {
   description = "the service account used by cloud run app"
   type        = string

@@ -34,3 +34,10 @@ output "second_subnet_network" {
 #   value       = local.healthchecks
 # }
 
+output "cloud-run-name" {
+  value = google_cloud_run_v2_service.cloud-run-app.name
+}
+
+# output "cloud-run-name" {
+#   value = google_cloud_run_v2_service.cloud-run-app.
+# }

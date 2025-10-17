@@ -21,10 +21,12 @@ resource "google_cloud_run_v2_service" "cloud-run-app" {
   deletion_protection = false
   ingress             = var.ingress # Allows traffic from which sources? (internet, VPC, and Cloud Run services)
   project             = var.project_id
+  
 
   template {
     containers {
       image = var.image
     }
+
   }
 }

@@ -25,8 +25,15 @@ resource "google_storage_bucket" "scripts" {
   uniform_bucket_level_access = true
 }
 
-resource "google_storage_bucket_object" "scriptobjetc" {
+resource "google_storage_bucket_object" "scriptobjetc1" {
   name   = "${google_storage_bucket.scripts.name}-object"
   bucket = google_storage_bucket.scripts.name
-  source = "./nginx"
+  source = "nginx-mig1.sh"
 }
+
+resource "google_storage_bucket_object" "scriptobjetc2" {
+  name   = "${google_storage_bucket.scripts.name}-object"
+  bucket = google_storage_bucket.scripts.name
+  source = "nginx-mig2.sh"
+}
+
