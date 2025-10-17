@@ -21,12 +21,17 @@ resource "google_cloud_run_v2_service" "cloud-run-app" {
   deletion_protection = false
   ingress             = var.ingress # Allows traffic from which sources? (internet, VPC, and Cloud Run services)
   project             = var.project_id
-  
+
 
   template {
     containers {
       image = var.image
     }
+    vpc_access {
+      network_interfaces {
+        network    = "projects/${var.project_id}/global/networks/${var.network_name}"
+        subnetwork = "projects/${var.project_id}/regions/${var.region}/subnetworks/${module.subnet.subnets["us-west1/subnet-01"].name}"
+      }
 
   }
 }
