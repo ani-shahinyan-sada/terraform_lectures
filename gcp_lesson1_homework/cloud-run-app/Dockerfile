@@ -1,11 +1,11 @@
 FROM python:3.9-alpine
 
-WORKDIR /python_app
+WORKDIR /cloud-run-app
 
 RUN pip install Flask==2.3.3 PyMySQL==1.1.0
 
-COPY app.py .
+COPY main.py .
 
 EXPOSE 8080
 
-CMD ["python", "app.py"]
+CMD ["python", "main.py"]
