@@ -41,3 +41,14 @@ output "cloud-run-name" {
 # output "cloud-run-name" {
 #   value = google_cloud_run_v2_service.cloud-run-app.
 # }
+output "cloudsql_connection_name" {
+  value = module.mysql.instance_connection_name
+}
+
+output "cloudsql_psc_attachment" {
+  value = module.mysql.instance_psc_attachment
+}
+
+output "cloudsql_instance_name" {
+  value = module.mysql.instance_name
+}

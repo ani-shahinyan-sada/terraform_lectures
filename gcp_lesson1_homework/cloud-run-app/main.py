@@ -1,17 +1,19 @@
 import os
 import pymysql
 from flask import Flask, render_template, jsonify
+from google.cloud.sql.connector import Connector
+import pymysql
 
 app = Flask(__name__)
 
 def get_db_connection():
-    conn = pymysql.connect(
-        host='10.83.0.5',  # Your database private IP
-        user='default',
-        password='Um0=dHUJGqg;r8JF',  
-        database='default',
-        port=3306,
-        ssl={'ssl_disabled': False}  # Enable SSL using Google's certs
+    connector = Connector()
+    conn = connector.connect(
+        "testing-modules-474322:us-central1:instancedbfor-cloudrun-8397334e",
+        "pymysql",
+        user="default",
+        password="123123Hello!",
+        db="default"
     )
     return conn
 
