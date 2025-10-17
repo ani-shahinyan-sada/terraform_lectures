@@ -7,6 +7,7 @@ RUN pip install cloud-sql-python-connector[pymysql]
 
 COPY main.py .
 
+#hly mi hat el
 EXPOSE 8080
 
 CMD ["python", "main.py"]
