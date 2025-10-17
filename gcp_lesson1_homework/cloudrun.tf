@@ -29,9 +29,10 @@ resource "google_cloud_run_v2_service" "cloud-run-app" {
     }
     vpc_access {
       network_interfaces {
-        network    = "projects/${var.project_id}/global/networks/${var.network_name}"
-        subnetwork = "projects/${var.project_id}/regions/${var.region}/subnetworks/${module.subnet.subnets["us-west1/subnet-01"].name}"
+        network    = module.vpc.network_name
+        subnetwork = module.subnet.subnets["us-west1/subnet-01"].name
       }
 
+    }
   }
 }
